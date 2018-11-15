@@ -1,12 +1,11 @@
 package de.hska.iwi.ads.sorting;
 
-@SuppressWarnings("rawtypes")
-public class Mergesort extends AbsractMergesortBase{
-	
+public class ReverseMergesort extends AbsractMergesortBase{
+
+
+	@SuppressWarnings({"rawtypes", "unchecked"})
 	@Override
-	@SuppressWarnings({ "unchecked" })
-	protected void merge(Comparable[] a, 
-			int left, int middle,  int right) {
+	protected void merge(Comparable[] a, int left, int middle, int right){
 		int newLeft = left;
 		int newRight = middle+1;
 		
@@ -26,6 +25,4 @@ public class Mergesort extends AbsractMergesortBase{
 		}
 	}
 
-	
-	
 }
