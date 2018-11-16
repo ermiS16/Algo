@@ -15,20 +15,8 @@ class MergesortTest {
 		Mergesort sort = new Mergesort();
 		Integer[] toSort = {9,8,7,6,5,4,3,2,1};
 		Integer[] expected = {1,2,3,4,5,6,7,8,9};
-//		for (Integer integer : toSort) {
-//			System.out.print(integer+" ");
-//		}
-//		System.out.println();
 		sort.sort(toSort);
-//		for (Integer integer : toSort) {
-//			System.out.print(integer+" ");
-//		}
-//		System.out.println();
-//		for (Integer integer : expected) {
-//			System.out.print(integer+" ");
-//		}
-//		System.out.println();
-//		assertArrayEquals(expected, toSort);
+		assertArrayEquals(expected, toSort);
 	}
 
 	@SuppressWarnings("unchecked")
@@ -40,5 +28,18 @@ class MergesortTest {
 		sort.sort(toSort);
 		assertArrayEquals(expected, toSort);
 	}
+	
+	@SuppressWarnings("unchecked")
+	@Test
+	void testReverseMergesortStingArray1(){
+		Mergesort sort = new Mergesort();
+		String[] toSort = {"A","B","T","R","Ri"};
+		String[] expected = {"A","B","R","Ri","T"};
+		sort.sort(toSort);
+		assertArrayEquals(expected, toSort);
+	}
+
+	
+	
 
 }
