@@ -24,10 +24,11 @@ public class Mergesort extends AbsractMergesortBase{
 		for(int i=left; i<=right; i++) {
 			a[i] = b[i];
 		}
-		for(Comparable e : a) {
-			System.out.print(e+" ");
-		}
-		System.out.println();
+		//Debug Only
+//		for(Comparable e : a) {
+//			System.out.print(e+" ");
+//		}
+//		System.out.println();
 	}
 
 	
