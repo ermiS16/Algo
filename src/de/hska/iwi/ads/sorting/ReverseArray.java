@@ -5,13 +5,12 @@ public class ReverseArray implements Reverse{
 
 	@Override
 	public void reverse(Comparable[] a, int from, int to){
-		Comparable[] b = a.clone();
+		Comparable b;
 		
-		for(int i=from, k=to; i<=to;i++,k--) {
-			a[i] = b[k];
+		for(int i=from, k=to; i<=k;i++,k--) {
+			b = a[i];
+			a[i] = a[k];
+			a[k] = b;
 		}
 	}
-
-	
-	
 }

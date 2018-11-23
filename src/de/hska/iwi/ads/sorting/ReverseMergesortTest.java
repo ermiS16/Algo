@@ -112,6 +112,7 @@ class ReverseMergesortTest {
 		System.out.printf("%1.10f\n", (timeDiff)/toSeconds);
 		assertArrayEquals(expected, toSort);
 	}
+	/*
 	@SuppressWarnings("unchecked")
 	@Test
 	void testIntArrayUnsorted6() {
@@ -176,7 +177,7 @@ class ReverseMergesortTest {
 		System.out.printf("%1.10f\n", (timeDiff)/toSeconds);
 		assertArrayEquals(expected, toSort);
 	}
-
+*/
 
 	@SuppressWarnings("unchecked")
 	@Test
