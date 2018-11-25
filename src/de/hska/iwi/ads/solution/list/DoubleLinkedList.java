@@ -6,15 +6,16 @@ public class DoubleLinkedList<K extends Comparable<K>, V> extends AbstractDouble
 	@Override
 	@SuppressWarnings("unchecked")
 	public V get(Object o) {
+		ListElement current = this.head;
 		if(o == null) {
 			throw new NullPointerException();
 		}
 		K key = (K) o;
-		while(this.head.next != null) {
-			if(this.head.entry.getKey().equals(key)) {
-				return this.head.entry.getValue();
+		while(current != null) {
+			if(current.entry.getKey().equals(key)) {
+				return current.entry.getValue();
 			}else {
-				this.head = this.head.next;
+				current = current.next;
 			}			
 		}
 		return null;
@@ -22,17 +23,38 @@ public class DoubleLinkedList<K extends Comparable<K>, V> extends AbstractDouble
 	
 	@Override
 	public V put(K key, V value) {
+		ListElement current = this.head;
+		V oldValue;
+		
+		if(key == null) {
+			throw new NullPointerException();
+		}
 		
 		if(this.head == null) {
-		this.head = new ListElement(new SimpleEntry<>(key, value), null, null);
+			this.head = new ListElement(new SimpleEntry<>(key, value), null, null);
 			this.size++;
 			return  null;
 		}else {
-			this.head.previous = 
-					new ListElement(new SimpleEntry<>(key, value), null, this.head);
-			this.head = this.head.previous;
-			this.size++;
-			return null;
+			//Test if Key is already in List.
+			if(this.get(key) != null) {
+				do {
+					if(current.entry.getKey().equals(key)) {
+						oldValue = current.entry.getValue();
+						current.entry.setValue(value);
+						return oldValue;
+					}else {
+						current = current.next;
+					}
+				} while(current.next != null);
+				return null;
+			//Put New Element in first position of List.
+			}else {
+				this.head.previous = 
+						new ListElement(new SimpleEntry<>(key, value), null, this.head);
+				this.head = this.head.previous;
+				this.size++;
+				return null;				
+			}
 		}
 	}
 }

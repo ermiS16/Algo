@@ -16,7 +16,6 @@ class DoubleLinkedListTest extends MapTest{
 
 	@Override
 	public <K extends Comparable<K>, V> Map<K, V> createMap() {
-		Map<K,V> list = new DoubleLinkedList<>();
 		return new DoubleLinkedList<>();
 	}
 	
