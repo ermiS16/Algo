@@ -7,7 +7,7 @@ public class BinarySearchTree<K, V> extends AbstractBinaryTree{
 	public V get(Object o) {
 		return null;
 	}
-	public V put(K key, V value) {
-		return null;
-	}
+//	public V put(K key, V value) {
+//		return null;
+//	}
 }

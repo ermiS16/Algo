@@ -12,7 +12,7 @@ public class Hashtable<V, K> extends AbstractHashMap{
 		return null;
 	}
 	
-	public V put(K key, V value) {
-		return null;
-	}
+//	public V put(K key, V value) {
+//		return null;
+//	}
 }
