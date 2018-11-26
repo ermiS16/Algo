@@ -10,14 +10,12 @@ import de.hska.iwi.ads.dictionary.MapTest;
 
 class HashtableTest extends MapTest{
 
-	@Test
-	void test(){
-		fail("Not yet implemented");
-	}
 
+	private final int capacity = 10;
+	
 	@Override
 	public <K extends Comparable<K>, V> Map<K, V> createMap(){
-		return new Hashtable<>();
+		return new Hashtable<>(capacity);
 	}
 
 }

@@ -1,28 +1,41 @@
 package de.hska.iwi.ads.solution.list;
+import java.util.Iterator;
+
 import de.hska.iwi.ads.dictionary.*;
 
 public class DoubleLinkedList<K extends Comparable<K>, V> extends AbstractDoubleLinkedList<K,V>{
 	
 	@Override
-	@SuppressWarnings("unchecked")
+	@SuppressWarnings({ "unchecked", "rawtypes" })
 	public V get(Object o) {
+		Iterator iter = this.iterator();
 		ListElement current = this.head;
 		if(o == null) {
 			throw new NullPointerException();
 		}
 		K key = (K) o;
-		while(current != null) {
+		while(iter.hasNext()) {
 			if(current.entry.getKey().equals(key)) {
 				return current.entry.getValue();
 			}else {
 				current = current.next;
-			}			
+				iter.next();
+			}
 		}
+//		while(current != null) {
+//			if(current.entry.getKey().equals(key)) {
+//				return current.entry.getValue();
+//			}else {
+//				current = current.next;
+//			}			
+//		}
 		return null;
 	}
 	
+	@SuppressWarnings("rawtypes")
 	@Override
 	public V put(K key, V value) {
+		Iterator iter = this.iterator();
 		ListElement current = this.head;
 		V oldValue;
 		
@@ -45,7 +58,7 @@ public class DoubleLinkedList<K extends Comparable<K>, V> extends AbstractDouble
 					}else {
 						current = current.next;
 					}
-				} while(current.next != null);
+				} while(iter.hasNext());
 				return null;
 			//Put New Element in first position of List.
 			}else {
