@@ -7,6 +7,9 @@ public class BinarySearchTree<K extends Comparable<K>, V> extends AbstractBinary
 		if(o == null) {
 			throw new NullPointerException();
 		}
+		K key = (K) o;
+		
+		
 		return null;
 	}
 	public V put(K key, V value) {
