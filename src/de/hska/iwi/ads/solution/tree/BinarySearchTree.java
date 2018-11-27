@@ -5,6 +5,7 @@ import de.hska.iwi.ads.dictionary.*;
 
 public class BinarySearchTree<K extends Comparable<K>, V> extends AbstractBinaryTree<K,V>{
 	
+	@Override
 	@SuppressWarnings({ "rawtypes", "unchecked" })
 	public V get(Object o) {
 		Iterator iter = this.iterator();
@@ -15,53 +16,72 @@ public class BinarySearchTree<K extends Comparable<K>, V> extends AbstractBinary
 		K key = (K) o;
 		
 		while(iter.hasNext()) {
-			if(current.entry.getKey().compareTo(key) < 0) {
-				current = current.left;
-			}else if(current.entry.getKey().compareTo(key) > 0) {
-				current = current.right;
-			}else if(current.entry.getKey().compareTo(key) == 0) {
+			if(current.entry.getKey().compareTo(key) == 0) {
 				return current.entry.getValue();
+			}else {
+				if(current.entry.getKey().compareTo(key) > 0) {
+					current = current.left;
+				}else if(current.entry.getKey().compareTo(key) < 0) {
+					current = current.right;
+				} 				
 			}
-			
 			iter.next();
 		}
 		return null;
 	}
+	
+	@Override
 	@SuppressWarnings("rawtypes")
 	public V put(K key, V value) {
 		Node current = this.root;
 		Iterator iter = this.iterator();
 		V oldValue;
 		
+		if(this.root == null) {
+			this.root = new Node(key, value);
+			this.size++;
+			return null;
+		}
+		
 		if(this.get(key) != null) {
-			while(iter.hasNext()) {
+			 do {
 				if(current.entry.getKey().compareTo(key) == 0){
 					oldValue = current.entry.getValue();
 					current.entry.setValue(value);
 					return oldValue;
 				}else {
-					if(current.entry.getKey().compareTo(key) > 0) {
-						current.entry = current.right.entry;
-					}else if(current.entry.getKey().compareTo(key) < 0) {
-						current.entry = current.left.entry;
+					if(current.entry.getKey().compareTo(key) < 0) {
+						current = current.right;
+					}else if(current.entry.getKey().compareTo(key) > 0) {
+						current = current.left;
 					}
+					iter.next();
 				}
-				iter.next();
-			}			
+			}	while(iter.hasNext());		
 		}else {
-			while(iter.hasNext()) {
-					if(current.entry.getKey().compareTo(key) > 0) {
-						current.entry = current.right.entry;
-					}else if(current.entry.getKey().compareTo(key) < 0) {
-						current.entry = current.left.entry;
+			do{
+					if(current.entry.getKey().compareTo(key) < 0) {
+						if(current.right == null) {
+							current.right = new Node(key, value);
+							this.size++;
+							return null;
+						}else {
+							current = current.right;	
+						}
+					}else if(current.entry.getKey().compareTo(key) > 0) {
+						if(current.left == null) {
+							current.left = new Node(key, value);
+							this.size++;
+							return null;
+						}else {
+							current = current.left;	
+						}
+						
 					}
-				iter.next();
-			}
-			current.entry = new SimpleEntry<K,V>(key, value);
-			this.size++;
+					iter.next();
+			}while(iter.hasNext());
 			return null;
-}
-		
+		}
 		return null;
 	}
 }

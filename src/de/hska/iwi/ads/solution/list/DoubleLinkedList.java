@@ -22,13 +22,6 @@ public class DoubleLinkedList<K extends Comparable<K>, V> extends AbstractDouble
 				iter.next();
 			}
 		}
-//		while(current != null) {
-//			if(current.entry.getKey().equals(key)) {
-//				return current.entry.getValue();
-//			}else {
-//				current = current.next;
-//			}			
-//		}
 		return null;
 	}
 	
