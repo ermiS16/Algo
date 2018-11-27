@@ -15,7 +15,7 @@ public class BinarySearchTree<K extends Comparable<K>, V> extends AbstractBinary
 		}
 		K key = (K) o;
 		
-		while(iter.hasNext()) {
+		while(iter.hasNext() && current != null) {
 			if(current.entry.getKey().compareTo(key) == 0) {
 				return current.entry.getValue();
 			}else {
