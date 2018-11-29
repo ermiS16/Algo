@@ -19,6 +19,27 @@ class DoubleLinkedListTest extends MapTest{
 		return new DoubleLinkedList<>();
 	}
 	
-	
+	@Test
+	void testReplaceOnKey() {
+	    Map<Integer, String> map = createMap();
+	    
+	    map.put(5, "Fünf");
+	    map.put(3, "Drei");
+	    map.put(1, "Eins");
+	    map.put(9, "Neun");
+	    assertEquals(4, map.size());
+	    assertEquals("Drei", map.put(3, "Vier"));
+	    assertEquals("Vier", map.get(3));
+	}
 
+	@Test
+	void testRemoveExceptiopn() {
+	    Map<Integer, String> map = createMap();
+	    
+	    map.put(5, "Fünf");
+	    map.put(3, "Drei");
+	    map.put(1, "Eins");
+	    map.put(9, "Neun");
+		assertThrows(UnsupportedOperationException.class, () -> map.remove(1));
+	}
 }

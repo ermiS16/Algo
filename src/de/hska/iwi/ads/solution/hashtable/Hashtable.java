@@ -18,10 +18,28 @@ public class Hashtable<K extends Comparable<K>, V> extends AbstractHashMap<K,V>{
 			throw new NullPointerException();
 		}
 		K key = (K) o;
+		entry = getEntry(key);
+		if(entry != null) {
+			return entry.getValue();	
+		}else {
+			return null;
+		}
+	}
+	
+	/**
+	 * Iterates through the hashtable
+	 * @param key to Compare Entrys
+	 * @return The entry with the specific key. Null when key not exist.
+	 */
+	@SuppressWarnings("unchecked")
+	private Entry<K,V> getEntry(K key){
+		Iterator iter = this.iterator();
+		Entry<K,V> entry;
+		
 		while(iter.hasNext()) {
-			entry = (Entry<K, V>) iter.next();
+			entry = (Entry<K, V>) iter.next();			//next() returns a Entry<K,V>
 			if(entry.getKey().equals(key)) {
-				return entry.getValue();
+				return entry;
 			}
 		}
 		return null;
@@ -34,19 +52,16 @@ public class Hashtable<K extends Comparable<K>, V> extends AbstractHashMap<K,V>{
 		int counter = 1;
 		Iterator iter = this.iterator();
 		int hash = key.hashCode()%hashtable.length;
+		Entry<K,V> current = null;
 		
-		if(this.get(key) != null) {
-			while(iter.hasNext()) {
-				if(this.hashtable[hash].getKey().equals(key)){
-					oldValue = this.hashtable[hash].getValue();
-					this.hashtable[hash].setValue(value);
-				}
-				iter.next();
-			}
+		current = getEntry(key);
+		if(current != null) {
+			oldValue = current.getValue();
+			current.setValue(value);
 			return oldValue;
 		}
 		
-		while(hashtable[hash] != null) {
+		while(hashtable[hash] != null && counter < hashtable.length) {
 			hash = (int) ((hash + Math.pow(counter, 2))%hashtable.length);
 			counter++;
 		}

@@ -8,26 +8,35 @@ public class BinarySearchTree<K extends Comparable<K>, V> extends AbstractBinary
 	@Override
 	@SuppressWarnings({ "rawtypes", "unchecked" })
 	public V get(Object o) {
-		Iterator iter = this.iterator();
+//		Iterator iter = this.iterator();
 		Node current = this.root;
 		if(o == null) {
 			throw new NullPointerException();
 		}
 		K key = (K) o;
-		
-		while(iter.hasNext() && current != null) {
-			if(current.entry.getKey().compareTo(key) == 0) {
-				return current.entry.getValue();
-			}else {
-				if(current.entry.getKey().compareTo(key) > 0) {
-					current = current.left;
-				}else if(current.entry.getKey().compareTo(key) < 0) {
-					current = current.right;
-				} 				
+		return getRecursive(current, key);
+	}
+	
+	private V getRecursive(Node current, K key) {
+		V value = null;
+		if(current.entry.getKey().compareTo(key) == 0) {
+			value = current.entry.getValue();
+		}else {
+			if(current.entry.getKey().compareTo(key) > 0) {
+				if(current.left != null) {
+					value = getRecursive(current.left, key);	
+				}else {
+					value = null;
+				}
+			}if(current.entry.getKey().compareTo(key) < 0) {
+				if(current.right != null) {
+					value = getRecursive(current.right, key);	
+				}else {
+					value = null;
+				}			
 			}
-			iter.next();
 		}
-		return null;
+		return value;
 	}
 	
 	@Override
@@ -59,29 +68,35 @@ public class BinarySearchTree<K extends Comparable<K>, V> extends AbstractBinary
 				}
 			}	while(iter.hasNext());		
 		}else {
-			do{
-					if(current.entry.getKey().compareTo(key) < 0) {
-						if(current.right == null) {
-							current.right = new Node(key, value);
-							this.size++;
-							return null;
-						}else {
-							current = current.right;	
-						}
-					}else if(current.entry.getKey().compareTo(key) > 0) {
-						if(current.left == null) {
-							current.left = new Node(key, value);
-							this.size++;
-							return null;
-						}else {
-							current = current.left;	
-						}
-						
-					}
-					iter.next();
-			}while(iter.hasNext());
-			return null;
+			return addRecursive(current, key, value);
 		}
 		return null;
+	}
+	
+	private V addRecursive(Node current, K key, V value) {
+		
+		if(current.entry.getKey().compareTo(key) > 0) {
+			if(current.left != null) {
+				value = addRecursive(current.left, key, value);	
+			}else {
+				if(current.left == null) {
+					current.left = new Node(key, value);
+					this.size++;
+					return null;
+				}
+			}
+		}
+		if(current.entry.getKey().compareTo(key) < 0) {
+			if(current.right != null) {
+				value = addRecursive(current.right, key, value);	
+			}else {
+				if(current.right == null) {
+					current.right = new Node(key, value);
+					this.size++;
+					return null;
+				}
+			}
+		}
+		return value;
 	}
 }

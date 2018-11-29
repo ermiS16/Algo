@@ -14,13 +14,31 @@ public class DoubleLinkedList<K extends Comparable<K>, V> extends AbstractDouble
 			throw new NullPointerException();
 		}
 		K key = (K) o;
+		
+		current = getElement(current, key);
+		if(current != null) {
+			return current.entry.getValue();
+		}else {
+			return null;
+		}
+	}
+	
+	/**
+	 * Iterates trough the List.
+	 * @param current ListElement from which the iteration starts.
+	 * @param key to Compare Elements.
+	 * @return ListElement with the specific key. Null when key not exist.
+	 */
+	@SuppressWarnings("rawtypes")
+	private ListElement getElement(ListElement current, K key) {
+		Iterator iter = this.iterator();
 		while(iter.hasNext()) {
 			if(current.entry.getKey().equals(key)) {
-				return current.entry.getValue();
+				return current;
 			}else {
 				current = current.next;
-				iter.next();
 			}
+			iter.next();
 		}
 		return null;
 	}
@@ -41,26 +59,22 @@ public class DoubleLinkedList<K extends Comparable<K>, V> extends AbstractDouble
 			this.size++;
 			return  null;
 		}else {
-			//Test if Key is already in List.
-			if(this.get(key) != null) {
-				do {
-					if(current.entry.getKey().equals(key)) {
-						oldValue = current.entry.getValue();
-						current.entry.setValue(value);
-						return oldValue;
-					}else {
-						current = current.next;
-					}
-				} while(iter.hasNext());
-				return null;
-			//Put New Element in first position of List.
-			}else {
-				this.head.previous = 
-						new ListElement(new SimpleEntry<>(key, value), null, this.head);
-				this.head = this.head.previous;
-				this.size++;
-				return null;				
+			while(iter.hasNext()) {
+				current = getElement(current, key);
+				if(current != null) {					//Replace when Key already exist
+					oldValue = current.entry.getValue();
+					current.entry.setValue(value);
+					iter.next();
+					return oldValue;
+				}else {									//Add new Element if Key not exist
+					this.head.previous = 
+							new ListElement(new SimpleEntry<>(key, value), null, this.head);
+					this.head = this.head.previous;
+					this.size++;
+					return null;	
+				}
 			}
+		return null;
 		}
 	}
 }
