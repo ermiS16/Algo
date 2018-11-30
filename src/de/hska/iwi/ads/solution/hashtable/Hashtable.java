@@ -52,6 +52,9 @@ public class Hashtable<K extends Comparable<K>, V> extends AbstractHashMap<K,V>{
 		int counter = 1;
 		Iterator iter = this.iterator();
 		int hash = key.hashCode()%hashtable.length;
+		if(hash < 0) {
+			hash *= -1;
+		}
 		Entry<K,V> current = getEntry(key);
 		
 		
@@ -63,10 +66,14 @@ public class Hashtable<K extends Comparable<K>, V> extends AbstractHashMap<K,V>{
 		if(size >= hashtable.length ){
 			throw new DictionaryFullException();
 		}else{
+						
 			//Quadratisch Sondieren
 			while(hash > 0 && hashtable[hash] != null) {
 					hash = (int) (Math.pow(-1, counter+1) *
-							((hash + (Math.pow(counter/2, 2)))%hashtable.length));	
+							((hash + (Math.pow(counter/2, 2)))%hashtable.length));
+					if(hash < 0) {
+						hash *= -1;
+					}
 					counter++;
 			}
 			
@@ -75,6 +82,7 @@ public class Hashtable<K extends Comparable<K>, V> extends AbstractHashMap<K,V>{
 				this.size++;
 				return null;
 			}
+
 		}
 		return null;
 	}

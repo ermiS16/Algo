@@ -35,25 +35,12 @@ class HashtableTest extends MapTest{
 	    map.put(9, "Neun");
 	    map.put(10, "Zehn");
 	    map.put(11, "Elf");
-	    assertEquals(this.capacity, map.size());
+	    assertEquals(11, map.size());
 	    assertThrows(DictionaryFullException.class, ()-> map.put(12, "Zwölf"));
 	}
 	
-	@Test
-	void testReplaceOnKey() {
-	    Map<Integer, String> map = createMap();
-	    
-	    map.put(5, "F�nf");
-	    map.put(3, "Drei");
-	    map.put(1, "Eins");
-	    map.put(9, "Neun");
-	    assertEquals(4, map.size());
-	    assertEquals("Drei", map.put(3, "Vier"));
-	    assertEquals("Vier", map.get(3));
-	}
-	
 	  @Test
-	  void testSize3() {
+	  void testSize() {
 	    Map<Integer, String> map = createMap();
 	    
 	    map.put(11, "Elf");
@@ -81,9 +68,28 @@ class HashtableTest extends MapTest{
 	    map.put(9, "Neun");
 	    map.put(10, "Zehn");
 	    map.put(1, "Eins");
-	    assertEquals(this.capacity, map.size());
+	    assertEquals(11, map.size());
 	    assertEquals("Eins", map.get(1));
 	  }
+	  
+	  @Test
+	  void testput4() {
+	    Map<String, String> map = createMap();
+	    map.put("Elf", "Elf");
+	    map.put("Zwei", "Zwei");
+	    map.put("Vier", "Vier");
+	    map.put("Acht", "Acht");
+	    map.put("Drei", "Drei");
+	    map.put("Fünf", "Fünf");
+	    map.put("Sechs", "Sechs");
+	    map.put("Sieben", "Sieben");
+	    map.put("Neun", "Neun");
+	    map.put("Zehn", "Zehn");
+	    map.put("Eins", "Eins");
+	    assertEquals(11, map.size());
+	    assertEquals("Zwei", map.get("Zwei"));
+	  }
+
 
 	  
 	@Test

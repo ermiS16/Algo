@@ -6,9 +6,8 @@ import de.hska.iwi.ads.dictionary.*;
 public class BinarySearchTree<K extends Comparable<K>, V> extends AbstractBinaryTree<K,V>{
 	
 	@Override
-	@SuppressWarnings({ "rawtypes", "unchecked" })
+	@SuppressWarnings({ "unchecked" })
 	public V get(Object o) {
-//		Iterator iter = this.iterator();
 		Node current = this.root;
 		if(o == null) {
 			throw new NullPointerException();
