@@ -52,22 +52,29 @@ public class Hashtable<K extends Comparable<K>, V> extends AbstractHashMap<K,V>{
 		int counter = 1;
 		Iterator iter = this.iterator();
 		int hash = key.hashCode()%hashtable.length;
-		Entry<K,V> current = null;
+		Entry<K,V> current = getEntry(key);
 		
-		current = getEntry(key);
+		
 		if(current != null) {
 			oldValue = current.getValue();
 			current.setValue(value);
 			return oldValue;
 		}
-		
-		while(hashtable[hash] != null && counter < hashtable.length) {
-			hash = (int) ((hash + Math.pow(counter, 2))%hashtable.length);
-			counter++;
-		}
-		if(hashtable[hash] == null) {
-			hashtable[hash] = new SimpleEntry<>(key, value);
-			this.size++;
+		if(size >= hashtable.length ){
+			throw new DictionaryFullException();
+		}else{
+			//Quadratisch Sondieren
+			while(hash > 0 && hashtable[hash] != null) {
+					hash = (int) (Math.pow(-1, counter+1) *
+							((hash + (Math.pow(counter/2, 2)))%hashtable.length));	
+					counter++;
+			}
+			
+			if(hashtable[hash] == null) {
+				hashtable[hash] = new SimpleEntry<>(key, value);
+				this.size++;
+				return null;
+			}
 		}
 		return null;
 	}
