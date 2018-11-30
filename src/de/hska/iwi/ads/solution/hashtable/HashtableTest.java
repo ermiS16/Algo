@@ -8,8 +8,9 @@ import org.junit.jupiter.api.Test;
 
 import de.hska.iwi.ads.dictionary.AbstractDictionary.DictionaryFullException;
 import de.hska.iwi.ads.dictionary.MapTest;
+import de.hska.iwi.ads.solution.SolutionTest;
 
-class HashtableTest extends MapTest{
+class HashtableTest extends SolutionTest{
 
 
 	private final int capacity = 11;		//Wichtig: Primzahl!
@@ -38,21 +39,6 @@ class HashtableTest extends MapTest{
 	    assertEquals(11, map.size());
 	    assertThrows(DictionaryFullException.class, ()-> map.put(12, "Zwölf"));
 	}
-	
-	  @Test
-	  void testSize() {
-	    Map<Integer, String> map = createMap();
-	    
-	    map.put(11, "Elf");
-	    map.put(2, "Zwei");
-	    map.put(4, "Vier");
-	    map.put(8, "Acht");
-	    map.put(10, "Zehn");
-	    map.put(5, "Fünf");
-	    map.put(6, "Sechs");
-	    map.put(1, "Eins");
-	    assertEquals(8, map.size());
-	  }
 
 	  @Test
 	  void testget3() {
@@ -80,14 +66,24 @@ class HashtableTest extends MapTest{
 	    map.put("Vier", "Vier");
 	    map.put("Acht", "Acht");
 	    map.put("Drei", "Drei");
-	    map.put("Fünf", "Fünf");
+	    map.put("Fuenf", "Fuenf");
 	    map.put("Sechs", "Sechs");
 	    map.put("Sieben", "Sieben");
 	    map.put("Neun", "Neun");
 	    map.put("Zehn", "Zehn");
 	    map.put("Eins", "Eins");
 	    assertEquals(11, map.size());
-	    assertEquals("Zwei", map.get("Zwei"));
+	    assertEquals("Eins", map.get("Eins"));
+	    assertEquals("Drei", map.get("Drei"));
+	    assertEquals("Vier", map.get("Vier"));
+	    assertEquals("Fuenf", map.get("Fuenf"));
+	    assertEquals("Sechs", map.get("Sechs"));
+	    assertEquals("Sieben", map.get("Sieben"));
+	    assertEquals("Acht", map.get("Acht"));
+	    assertEquals("Neun", map.get("Neun"));
+	    assertEquals("Zehn", map.get("Zehn"));
+	    assertEquals("Elf", map.get("Elf"));
+//	    assertEquals("Zwei", map.get("Zwei"));
 	  }
 
 
