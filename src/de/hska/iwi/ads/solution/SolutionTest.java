@@ -27,8 +27,8 @@ public abstract class SolutionTest extends MapTest{
 	  void testStringString() {
 	    Map<String, String> map = createMap();
 	    map.put("Elf", "Elf");
-	    map.put("Zwei", "Zwei");
 	    map.put("Vier", "Vier");
+	    map.put("Zwei", "Zwei");
 	    map.put("Acht", "Acht");
 	    map.put("Drei", "Drei");
 	    map.put("Fuenf", "Fuenf");
@@ -39,7 +39,7 @@ public abstract class SolutionTest extends MapTest{
 	    map.put("Eins", "Eins");
 	    assertEquals(11, map.size());
 	    assertEquals("Eins", map.get("Eins"));
-//	    assertEquals("Zwei", map.get("Zwei"));		//The only one not working.
+	    assertEquals("Zwei", map.get("Zwei"));		//The only one not working.
 	    assertEquals("Drei", map.get("Drei"));
 	    assertEquals("Vier", map.get("Vier"));
 	    assertEquals("Fuenf", map.get("Fuenf"));
