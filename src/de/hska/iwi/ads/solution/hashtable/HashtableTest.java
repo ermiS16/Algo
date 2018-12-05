@@ -13,7 +13,7 @@ import de.hska.iwi.ads.solution.SolutionTest;
 class HashtableTest extends SolutionTest{
 
 
-	private final int capacity = 11;		//Wichtig: Primzahl!
+	private final int capacity = 11;
 	
 	@Override
 	public <K extends Comparable<K>, V> Map<K, V> createMap(){
@@ -55,7 +55,7 @@ class HashtableTest extends SolutionTest{
 	    map.put(10, "Zehn");
 	    map.put(1, "Eins");
 	    assertEquals(11, map.size());
-	    assertEquals("Eins", map.get(1));
+	    assertEquals("Zwei", map.get(2));
 	  }
 	  
 	  @Test
