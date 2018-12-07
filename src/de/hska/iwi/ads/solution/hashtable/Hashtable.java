@@ -1,7 +1,4 @@
 package de.hska.iwi.ads.solution.hashtable;
-import java.util.Iterator;
-import java.util.Map.Entry;
-
 import de.hska.iwi.ads.dictionary.*;
 
 public class Hashtable<K extends Comparable<K>, V> extends AbstractHashMap<K,V>{
@@ -35,6 +32,7 @@ public class Hashtable<K extends Comparable<K>, V> extends AbstractHashMap<K,V>{
 	 * @return The entry with the specific key. Null when key not exist.
 	 */
 	private Entry<K,V> getEntry(K key){
+//		int hash = key.hashCode();
 		
 		for(Entry<K,V> entry : this.entrySet()){
 			if(entry.getKey().compareTo(key) == 0) {
@@ -44,23 +42,24 @@ public class Hashtable<K extends Comparable<K>, V> extends AbstractHashMap<K,V>{
 		return null;
 	}
 	
-	private int probeQuadratic(int hash) {
+	private int quadraticProbe(int hash, int counter) {
 		int newHash = hash;
-		int counter = 1;
 		
 		if(newHash < 0) {
 			newHash *= -1;
 		}
-		while(hashtable[newHash] != null) {
-			newHash = (int) (newHash + (Math.pow(counter, 2)))%hashtable.length;
-			counter++;
-		}
+		
+//		while(counter < hashtable.length || hashtable[counter] != null) {
+			newHash = (newHash + (counter*counter))%hashtable.length;	
+//		}
+		
 		return newHash;
 	}
 	
 	@Override
 	public V put(K key, V value) {
 		V oldValue = null;
+		int index = 0;
 		int hash = key.hashCode()%hashtable.length;
 		if(hash < 0) {
 			hash *= -1;
@@ -76,11 +75,15 @@ public class Hashtable<K extends Comparable<K>, V> extends AbstractHashMap<K,V>{
 		if(size >= hashtable.length ){
 			throw new DictionaryFullException();
 		}else{
-			hash = probeQuadratic(hash);
-			if(hashtable[hash] == null) {
-				hashtable[hash] = new SimpleEntry<>(key, value);
-				this.size++;
-				return null;
+			while(index<hashtable.length) {
+				hash = quadraticProbe(hash, index);
+				if(hashtable[hash] == null) {
+					current = new SimpleEntry<>(key, value);
+					hashtable[hash] = current;
+					this.size++;
+					return null;
+				}
+				index++;
 			}
 		}
 		return null;

@@ -20,6 +20,17 @@ class HashtableTest extends SolutionTest{
 		return new Hashtable<>(capacity);
 	}
 
+	@Test
+	void testFirstPosition() {
+		Map<Integer, Integer> map = createMap();
+	    
+	    map.put(4, 4);
+	    map.put(0, 0);
+	    map.put(3, 3);
+	    assertEquals(4, (int) map.get(4));
+	    assertEquals(0, (int) map.get(0));
+	    
+	}
 	
 	@Test
 	void testDictionaryFullException() {
