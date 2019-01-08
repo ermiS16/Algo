@@ -7,8 +7,8 @@ import java.util.Map;
 import org.junit.jupiter.api.Test;
 
 import de.hska.iwi.ads.dictionary.AbstractDictionary.DictionaryFullException;
-import de.hska.iwi.ads.dictionary.MapTest;
 import de.hska.iwi.ads.solution.SolutionTest;
+import de.hska.iwi.ads.solution.SolutionTestCase;
 
 class HashtableTest extends SolutionTest{
 
@@ -26,7 +26,6 @@ class HashtableTest extends SolutionTest{
 	    
 	    map.put(4, 4);
 	    map.put(0, 0);
-	    map.put(3, 3);
 	    assertEquals(4, (int) map.get(4));
 	    assertEquals(0, (int) map.get(0));
 	    
@@ -40,7 +39,7 @@ class HashtableTest extends SolutionTest{
 	    map.put(2, "Zwei");
 	    map.put(3, "Drei");
 	    map.put(4, "Vier");
-	    map.put(5, "F�nf");
+	    map.put(5, "Fuenf");
 	    map.put(6, "Sechs");
 	    map.put(7, "Sieben");
 	    map.put(8, "Acht");
@@ -94,20 +93,6 @@ class HashtableTest extends SolutionTest{
 	    assertEquals("Neun", map.get("Neun"));
 	    assertEquals("Zehn", map.get("Zehn"));
 	    assertEquals("Elf", map.get("Elf"));
-//	    assertEquals("Zwei", map.get("Zwei"));
-	  }
-
-
-	  
-	@Test
-	void testRemoveException() {
-	    Map<Integer, String> map = createMap();
-	    
-	    map.put(5, "F�nf");
-	    map.put(3, "Drei");
-	    map.put(1, "Eins");
-	    map.put(9, "Neun");
-		assertThrows(UnsupportedOperationException.class, () -> map.remove(1));
-	}
-	
+	    assertEquals("Zwei", map.get("Zwei"));
+	  }	 
 }

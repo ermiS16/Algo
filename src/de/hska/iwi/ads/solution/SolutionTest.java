@@ -8,6 +8,8 @@ import org.junit.jupiter.api.Test;
 
 import de.hska.iwi.ads.dictionary.MapTest;
 
+import de.hska.iwi.ads.solution.SolutionTestCase;
+
 public abstract class SolutionTest extends MapTest{
 	
 	@Test
@@ -245,4 +247,29 @@ public abstract class SolutionTest extends MapTest{
 	    map.put(9, "Neun");
 		assertThrows(UnsupportedOperationException.class, () -> map.remove(1));
 	}
+	  @Test
+	  void testPutObject() {
+		  Map<String, SolutionTestCase<String>> map = createMap();
+		  SolutionTestCase<String> sc = new SolutionTestCase<>("Eric", "Mis");
+		  map.put("Eric", sc);
+		  assertEquals(sc, map.get("Eric"));
+	  }
+	 @Test
+	  void testPutObject2() {
+		  @SuppressWarnings({ "rawtypes", "unchecked" })
+		Map<SolutionTestCase, String> map = createMap();
+		  SolutionTestCase<String> sc = new SolutionTestCase<>("Eric", "Mis");
+		  map.put(sc, "Eric");
+		  assertEquals("Eric", map.get(sc));
+	  }
+	  @Test
+	  void testPutObject3() {
+		  @SuppressWarnings({"rawtypes", "unchecked" })
+		  Map<SolutionTestCase, SolutionTestCase<String>> map = createMap();
+		  SolutionTestCase<String> sc = new SolutionTestCase<>("Eric", "Mis");
+		  SolutionTestCase<String> kc = new SolutionTestCase<>("Patrick", "Mis");
+		  map.put(sc, kc);
+		  assertEquals(kc, map.get(sc));
+	  }
+
 }

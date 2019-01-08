@@ -17,7 +17,7 @@ public class Hashtable<K extends Comparable<K>, V> extends AbstractHashMap<K,V>{
 		}
 		@SuppressWarnings({ "unchecked" })
 		K key = (K) o;
-		
+
 		do {
 			hash = quadraticProbe(key, index);
 			if(hashtable[hash] != null) {
@@ -30,7 +30,7 @@ public class Hashtable<K extends Comparable<K>, V> extends AbstractHashMap<K,V>{
 		
 		return null;
 	}
-	
+
 	private int quadraticProbe(K key, int counter) {
 		int hash = key.hashCode() % hashtable.length;
 		
