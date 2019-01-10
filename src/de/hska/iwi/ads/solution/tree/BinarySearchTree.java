@@ -9,93 +9,67 @@ public class BinarySearchTree<K extends Comparable<K>, V> extends AbstractBinary
 	@SuppressWarnings({ "unchecked" })
 	public V get(Object o) {
 		Node current = this.root;
+		Node result;
 		if(o == null) {
 			throw new NullPointerException();
 		}
 		K key = (K) o;
-		return getRecursive(current, key);
-	}
-	
-	private V getRecursive(Node current, K key) {
-		V value = null;
-		if(current.entry.getKey().compareTo(key) == 0) {
-			value = current.entry.getValue();
-		}else {
-			if(current.entry.getKey().compareTo(key) > 0) {
-				if(current.left != null) {
-					value = getRecursive(current.left, key);	
-				}else {
-					value = null;
-				}
-			}if(current.entry.getKey().compareTo(key) < 0) {
-				if(current.right != null) {
-					value = getRecursive(current.right, key);	
-				}else {
-					value = null;
-				}			
-			}
+		result = getRec(current, key);
+		if(result == null) return null;
+		else {
+			return result.entry.getValue();	
 		}
-		return value;
+	}
+
+	private Node getRec(Node current, K key) {
+		Node result = null;
+		if(current == null || current.entry.getKey().compareTo(key) == 0) {
+			result = current;
+		}else if(current.entry.getKey().compareTo(key) > 0) {
+			result = getRec(current.left, key);
+		}else {
+			result = getRec(current.right, key);
+		}
+	return result;
 	}
 	
 	@Override
-	@SuppressWarnings("rawtypes")
 	public V put(K key, V value) {
 		Node current = this.root;
-		Iterator iter = this.iterator();
-		V oldValue;
-		
-		if(this.root == null) {
+		V oldValue = null;
+		if(current == null) {
 			this.root = new Node(key, value);
 			this.size++;
 			return null;
 		}
-		
-		if(this.get(key) != null) {
-			 do {
-				if(current.entry.getKey().compareTo(key) == 0){
-					oldValue = current.entry.getValue();
-					current.entry.setValue(value);
-					return oldValue;
-				}else {
-					if(current.entry.getKey().compareTo(key) < 0) {
-						current = current.right;
-					}else if(current.entry.getKey().compareTo(key) > 0) {
-						current = current.left;
-					}
-					iter.next();
-				}
-			}	while(iter.hasNext());		
+		oldValue = get(key);
+		if(oldValue != null) {
+			current = getRec(current, key);
+			current.entry.setValue(value);
+			return oldValue;
 		}else {
-			return addRecursive(current, key, value);
+			return addRec(current, key, value);	
 		}
-		return null;
 	}
 	
-	private V addRecursive(Node current, K key, V value) {
-		
-		if(current.entry.getKey().compareTo(key) > 0) {
-			if(current.left != null) {
-				value = addRecursive(current.left, key, value);	
-			}else {
-				if(current.left == null) {
-					current.left = new Node(key, value);
-					this.size++;
-					return null;
-				}
-			}
-		}
+	private V addRec(Node current, K key, V value) {
 		if(current.entry.getKey().compareTo(key) < 0) {
 			if(current.right != null) {
-				value = addRecursive(current.right, key, value);	
+				addRec(current.right, key, value);
 			}else {
-				if(current.right == null) {
-					current.right = new Node(key, value);
-					this.size++;
-					return null;
-				}
+				current.right = new Node(key, value);
+				this.size++;
+				return null;
+			}
+		}else if(current.entry.getKey().compareTo(key) > 0) {
+			if(current.left != null) {
+				addRec(current.left, key, value);			
+			}else {
+				current.left = new Node(key, value);
+				this.size++;
+				return null;
 			}
 		}
-		return value;
+		return null;
 	}
 }
