@@ -254,22 +254,26 @@ public abstract class SolutionTest extends MapTest{
 		  map.put("Eric", sc);
 		  assertEquals(sc, map.get("Eric"));
 	  }
-	 @Test
-	  void testPutObject2() {
-		  @SuppressWarnings({ "rawtypes", "unchecked" })
-		Map<SolutionTestCase, String> map = createMap();
-		  SolutionTestCase<String> sc = new SolutionTestCase<>("Eric", "Mis");
-		  map.put(sc, "Eric");
-		  assertEquals("Eric", map.get(sc));
-	  }
-	  @Test
-	  void testPutObject3() {
-		  @SuppressWarnings({"rawtypes", "unchecked" })
-		  Map<SolutionTestCase, SolutionTestCase<String>> map = createMap();
-		  SolutionTestCase<String> sc = new SolutionTestCase<>("Eric", "Mis");
-		  SolutionTestCase<String> kc = new SolutionTestCase<>("Patrick", "Mis");
-		  map.put(sc, kc);
-		  assertEquals(kc, map.get(sc));
-	  }
-
+	  
+/**
+ * ToDo: Test Object as Key.	  
+ */
+	  
+//	 @Test
+//	  void testPutObject2() {
+//		Map<SolutionTestCase, String> map = createMap();
+//		  SolutionTestCase<String> sc = new SolutionTestCase<>("Eric", "Mis");
+//		  map.put(sc, "Eric");
+//		  assertEquals("Eric", map.get(sc));
+//	  }
+//	  @Test
+//	  void testPutObject3() {
+//		  @SuppressWarnings({"unchecked" })
+//		  Map<SolutionTestCase, SolutionTestCase<String>> map = createMap();
+//		  SolutionTestCase<String> sc = new SolutionTestCase<>("Eric", "Mis");
+//		  SolutionTestCase<String> kc = new SolutionTestCase<>("Patrick", "Mis");
+//		  map.put(sc, kc);
+//		  assertEquals(kc, map.get(sc));
+//	  }
+	   
 }

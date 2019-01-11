@@ -1,5 +1,4 @@
 package de.hska.iwi.ads.solution.tree;
-import java.util.Iterator;
 
 import de.hska.iwi.ads.dictionary.*;
 
@@ -42,20 +41,19 @@ public class BinarySearchTree<K extends Comparable<K>, V> extends AbstractBinary
 			this.size++;
 			return null;
 		}
-		oldValue = get(key);
-		if(oldValue != null) {
-			current = getRec(current, key);
-			current.entry.setValue(value);
-			return oldValue;
-		}else {
 			return addRec(current, key, value);	
-		}
 	}
 	
 	private V addRec(Node current, K key, V value) {
+		V returnValue = null;
+		if(current.entry.getKey().compareTo(key) == 0) {
+			returnValue = current.entry.getValue();
+			current.entry.setValue(value);
+			return returnValue;					//return oldValue
+		}
 		if(current.entry.getKey().compareTo(key) < 0) {
 			if(current.right != null) {
-				addRec(current.right, key, value);
+				returnValue = addRec(current.right, key, value);
 			}else {
 				current.right = new Node(key, value);
 				this.size++;
@@ -63,13 +61,13 @@ public class BinarySearchTree<K extends Comparable<K>, V> extends AbstractBinary
 			}
 		}else if(current.entry.getKey().compareTo(key) > 0) {
 			if(current.left != null) {
-				addRec(current.left, key, value);			
+				returnValue = addRec(current.left, key, value);			
 			}else {
 				current.left = new Node(key, value);
 				this.size++;
 				return null;
 			}
 		}
-		return null;
+		return returnValue;
 	}
 }

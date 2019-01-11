@@ -1,6 +1,6 @@
 package de.hska.iwi.ads.solution;
 
-public class SolutionTestCase<T extends Comparable<T>> implements Comparable<T>{
+public class SolutionTestCase<K extends Comparable<K>> implements Comparable<K>{
 	private String firstName;
 	private String lastName;
 	
@@ -30,7 +30,8 @@ public class SolutionTestCase<T extends Comparable<T>> implements Comparable<T>{
 		if(obj == this) return true;
 		
 		if(obj instanceof SolutionTestCase) {
-			SolutionTestCase sc = (SolutionTestCase) obj;
+			@SuppressWarnings("unchecked")
+			SolutionTestCase<K> sc = (SolutionTestCase<K>) obj;
 			if(this.firstName.equals(sc.firstName)) {
 				if(this.lastName.equals(sc.lastName)) {
 					return true;
@@ -41,12 +42,12 @@ public class SolutionTestCase<T extends Comparable<T>> implements Comparable<T>{
 	}
 	
 	@Override
-	public int compareTo(T o) {
+	public int compareTo(K o) {
 		final int BEFORE = 1;
 		final int EQUAL = 0;
 		final int AFTER = -1;
 		if(o instanceof SolutionTestCase) {
-			SolutionTestCase sc = (SolutionTestCase) o;
+			SolutionTestCase<K> sc = (SolutionTestCase<K>) o;
 			if(this == sc) return EQUAL;
 			if(this.lastName.compareTo(sc.lastName) == BEFORE) {
 				return BEFORE;
