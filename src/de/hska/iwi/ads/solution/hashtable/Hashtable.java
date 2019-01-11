@@ -33,9 +33,9 @@ public class Hashtable<K extends Comparable<K>, V> extends AbstractHashMap<K,V>{
 
 	private int quadraticProbe(K key, int counter) {
 		int hash = key.hashCode() % hashtable.length;
-		
-		hash = (hash + (counter*counter))%hashtable.length;
 		if(hash < 0) hash *= -1;
+		hash = (hash + (counter*counter))%hashtable.length;
+		
 		return hash;
 	}
 	

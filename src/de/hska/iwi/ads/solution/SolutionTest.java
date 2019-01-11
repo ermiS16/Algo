@@ -13,6 +13,12 @@ import de.hska.iwi.ads.solution.SolutionTestCase;
 public abstract class SolutionTest extends MapTest{
 	
 	@Test
+	void testIsEmpty() {
+		Map<Integer, String> map = createMap();
+		assertEquals(0, map.size());
+	}
+	
+	@Test
 	void testNoDoubleElement() {
 	    Map<Integer, String> map = createMap();
 	  
@@ -259,21 +265,21 @@ public abstract class SolutionTest extends MapTest{
  * ToDo: Test Object as Key.	  
  */
 	  
-//	 @Test
-//	  void testPutObject2() {
-//		Map<SolutionTestCase, String> map = createMap();
-//		  SolutionTestCase<String> sc = new SolutionTestCase<>("Eric", "Mis");
-//		  map.put(sc, "Eric");
-//		  assertEquals("Eric", map.get(sc));
-//	  }
-//	  @Test
-//	  void testPutObject3() {
-//		  @SuppressWarnings({"unchecked" })
-//		  Map<SolutionTestCase, SolutionTestCase<String>> map = createMap();
-//		  SolutionTestCase<String> sc = new SolutionTestCase<>("Eric", "Mis");
-//		  SolutionTestCase<String> kc = new SolutionTestCase<>("Patrick", "Mis");
-//		  map.put(sc, kc);
-//		  assertEquals(kc, map.get(sc));
-//	  }
+	 @Test
+	  void testPutObject2() {
+		Map<SolutionTestCase, String> map = createMap();
+		  SolutionTestCase<String> sc = new SolutionTestCase<>("Eric", "Mis");
+		  map.put(sc, "Eric");
+		  assertEquals("Eric", map.get(sc));
+	  }
+	  @Test
+	  void testPutObject3() {
+		  @SuppressWarnings({"unchecked" })
+		  Map<SolutionTestCase, SolutionTestCase<String>> map = createMap();
+		  SolutionTestCase<String> sc = new SolutionTestCase<>("Eric", "Mis");
+		  SolutionTestCase<String> kc = new SolutionTestCase<>("Patrick", "Mis");
+		  map.put(sc, kc);
+		  assertEquals(kc, map.get(sc));
+	  }
 	   
 }
